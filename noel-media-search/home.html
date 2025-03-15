@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>NoelVerse | Home</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>NoelVerse</p>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="home.html" class="link">Home</a></li>
+                    <li><a href="profile.html" class="link">Profile</a></li>
+                    <li><a href="services.html" class="link">Services</a></li>
+                    <li><a href="about.html" class="link">About</a></li>
+                </ul>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Welcome to NoelVerse</h1>
+                <p>Search for your favorite images below</p>
+            </header>
+
+            <!-- Search Form -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for images...">
+                <button class="btn" id="searchBtn" onclick="performSearch()">Search</button>
+                <button class="btn" id="saveSearchBtn" onclick="saveSearch()" style="display: none;">Save Search</button>
+            </div>
+
+            <!-- Search Results -->
+            <div class="results-container" id="resultsContainer">
+                <!-- Dynamically populated search results go here -->
+            </div>
+
+            <!-- Logged-in User Options -->
+            <div id="userOptions" style="display: none;">
+                <button class="btn" onclick="viewProfile()">Profile</button>
+                <button class="btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation toggle for mobile
+        function myMenuFunction() {
+            var i = document.getElementById("navMenu");
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+
+        // Simulated user login status
+        var isLoggedIn = true; // Set to true if user is logged in, false otherwise
+
+        // Show/hide user options based on login status
+        if (isLoggedIn) {
+            document.getElementById("userOptions").style.display = "block";
+        }
+
+        // Search function
+        function performSearch() {
+            var searchTerm = document.getElementById("searchInput").value;
+            if (!searchTerm) {
+                alert("Please enter a search term.");
+                return;
+            }
+
+            // Simulate fetching search results (you can replace this with an API call)
+            var resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            var dummyResults = [
+                { id: 1, title: 'Image 1', url: 'https://via.placeholder.com/200' },
+                { id: 2, title: 'Image 2', url: 'https://via.placeholder.com/200' },
+                { id: 3, title: 'Image 3', url: 'https://via.placeholder.com/200' }
+            ];
+
+            dummyResults.forEach(function(image) {
+                var imgElement = document.createElement('div');
+                imgElement.classList.add('image-item');
+                imgElement.innerHTML = ` 
+                    <img src="${image.url}" alt="${image.title}">
+                    <h3>${image.title}</h3>
+                    <button class="btn favorite-btn" onclick="favoriteImage(${image.id})">Favorite</button>
+                `;
+                resultsContainer.appendChild(imgElement);
+            });
+
+            // Show "Save Search" button after search
+            document.getElementById("saveSearchBtn").style.display = 'inline-block';
+        }
+
+        // Save search functionality
+        function saveSearch() {
+            var searchTerm = document.getElementById("searchInput").value;
+            if (searchTerm) {
+                alert("Search saved: " + searchTerm);
+            } else {
+                alert("Please enter a search term to save.");
+            }
+        }
+
+        // Favorite image functionality
+        function favoriteImage(imageId) {
+            alert("Image " + imageId + " added to your favorites.");
+        }
+
+        // Profile view (simulated)
+        function viewProfile() {
+            window.location.href = "profile.html"; // Redirect to the profile page
+        }
+
+        // Logout functionality
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById("userOptions").style.display = "none"; // Hide user options
+            alert("You have logged out.");
+            // Redirect to index.html after logging out
+            window.location.href = "index.html"; // Redirect to the index page
+        }
+    </script>
+
+</body>
+</html>

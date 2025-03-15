@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>NoelVerse | Login</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>NoelVerse</p>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html" class="link">Home</a></li>
+                    <li><a href="login.html" class="link">Login</a></li>
+                    <li><a href="services.html" class="link">Services</a></li>
+                    <li><a href="about.html" class="link">About</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
+                <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
+        </nav>
+
+        <div class="form-box">
+            <!-- Login Form -->
+            <div class="login-container" id="login">
+                <div class="top">
+                    <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>
+                    <header>Login</header>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Username or Email" id="loginUsername" oninput="toggleIconVisibility('loginUsername', 'loginUserIcon')">
+                    <i class="bx bx-user" id="loginUserIcon"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="loginPassword" placeholder="Password" oninput="toggleRevealButton('loginPassword')">
+                    <i class="bx bx-lock-alt" id="loginPasswordIcon" style="display: block;"></i>
+                    <button type="button" class="reveal-btn" id="loginRevealBtn" onclick="togglePasswordVisibility('loginPassword')" style="display: none;">
+                        <i class="bx bx-show"></i>
+                    </button>
+                </div>
+                <div class="input-box remember-box">
+                    <label>
+                        <input type="checkbox" id="rememberMe"> Remember Me
+                    </label>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Sign In" onclick="signIn()">
+                </div>
+                <div class="forgot-password">
+                    <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="register-container" id="register">
+                <div class="top">
+                    <span>Have an account? <a href="#" onclick="login()">Login</a></span>
+                    <header>Sign Up</header>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="First Name" id="firstName" oninput="toggleIconVisibility('firstName', 'firstNameIcon')">
+                        <i class="bx bx-user" id="firstNameIcon"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Last Name" id="lastName" oninput="toggleIconVisibility('lastName', 'lastNameIcon')">
+                        <i class="bx bx-user" id="lastNameIcon"></i>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Email" id="email" oninput="toggleIconVisibility('email', 'emailIcon')">
+                    <i class="bx bx-envelope" id="emailIcon"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" id="registerPassword" placeholder="Password" oninput="toggleRevealButton('registerPassword')">
+                    <i class="bx bx-lock-alt" id="registerPasswordIcon"></i>
+                    <button type="button" class="reveal-btn" id="registerRevealBtn" onclick="togglePasswordVisibility('registerPassword')" style="display: none;">
+                        <i class="bx bx-show"></i>
+                    </button>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Register">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation toggle for mobile
+        function myMenuFunction() {
+            var i = document.getElementById("navMenu");
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+
+        var a = document.getElementById("loginBtn");
+        var b = document.getElementById("registerBtn");
+        var x = document.getElementById("login");
+        var y = document.getElementById("register");
+
+        // Show login form
+        function login() {
+            x.style.left = "4px";
+            y.style.right = "-520px";
+            a.className += " white-btn";
+            b.className = "btn";
+            x.style.opacity = 1;
+            y.style.opacity = 0;
+        }
+
+        // Show register form
+        function register() {
+            x.style.left = "-510px";
+            y.style.right = "5px";
+            a.className = "btn";
+            b.className += " white-btn";
+            x.style.opacity = 0;
+            y.style.opacity = 1;
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility(passwordFieldId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var currentType = passwordField.type;
+            if (currentType === "password") {
+                passwordField.type = "text"; // Reveal password
+            } else {
+                passwordField.type = "password"; // Hide password
+            }
+        }
+
+        // Show/hide reveal button for password
+        function toggleRevealButton(passwordFieldId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var revealBtn = document.getElementById(passwordFieldId === 'loginPassword' ? 'loginRevealBtn' : 'registerRevealBtn');
+            var lockIcon = document.getElementById(passwordFieldId === 'loginPassword' ? 'loginPasswordIcon' : 'registerPasswordIcon');
+
+            if (passwordField.value.length > 0) {
+                revealBtn.style.display = 'block'; // Show reveal button
+                lockIcon.style.display = 'none';  // Hide lock icon when input is provided
+            } else {
+                revealBtn.style.display = 'none';  // Hide reveal button
+                lockIcon.style.display = 'block';  // Show lock icon if no input
+            }
+        }
+
+        // Toggle icon visibility based on input value
+        function toggleIconVisibility(inputFieldId, iconId) {
+            var inputField = document.getElementById(inputFieldId);
+            var icon = document.getElementById(iconId);
+
+            if (inputField.value.length > 0) {
+                icon.style.display = 'none'; // Hide icon when input is entered
+            } else {
+                icon.style.display = 'block'; // Show icon when input is cleared
+            }
+        }
+
+        // Functional Sign In (Login)
+        function signIn() {
+            var username = document.getElementById('loginUsername').value;
+            var password = document.getElementById('loginPassword').value;
+
+            // Basic validation (can be expanded)
+            if (username && password) {
+                alert("Logging in...");
+
+                // Redirect to home page after "successful" login
+                window.location.href = "home.html"; // Example redirection URL
+            } else {
+                alert("Please fill in both username and password.");
+            }
+        }
+
+        // Forgot password logic (can be implemented further)
+        function forgotPassword() {
+            window.location.href = "forgot-password.html";
+        }
+    </script>
+</body>
+</html>

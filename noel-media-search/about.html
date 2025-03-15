@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>About | NoelVerse</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>NoelVerse</p>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html" class="link">Home</a></li>
+                    <li><a href="services.html" class="link">Services</a></li>
+                    <li><a href="about.html" class="link">About</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn" id="loginBtn" onclick="window.location.href='login.html'">Login / Sign Up</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>About NoelVerse</h1>
+            </header>
+
+            <section class="about-section">
+                <h2>Welcome to NoelVerse</h2>
+                <p>NoelVerse is a platform designed for users to search, save, and manage their favorite images. It offers a wide variety of images that users can explore based on their interests, save their searches, and mark their favorite images for easy access later.</p>
+
+                <h3>Features</h3>
+                <ul>
+                    <li>Search for a wide variety of images based on your preferences.</li>
+                    <li>Save your favorite searches for quick access later.</li>
+                    <li>Manage your favorite images and keep track of the ones you love.</li>
+                    <li>User-friendly interface for easy navigation and interaction.</li>
+                </ul>
+
+                <h3>Contact Us</h3>
+                <p>If you have any questions or feedback, feel free to contact us:</p>
+                <p>Email: <a href="mailto:29857104@students.lincoln.ac.uk">29857104@students.lincoln.ac.uk</a></p>
+                <p>Phone: +44 7546 299730</p>
+
+                <p>Follow us on social media:</p>
+                <ul>
+                    <li><a href="https://www.instagram.com/noelverse" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.twitter.com/noelverse" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/noelverse" target="_blank">Facebook</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Navigation toggle for mobile
+        function myMenuFunction() {
+            var i = document.getElementById("navMenu");
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+    </script>
+
+</body>
+</html>
